@@ -23,6 +23,8 @@ Explique o contexto, a dor e os sinais de que o problema existe.
 
 Defina o conceito com precisão, incluindo limites e termos relacionados.
 
+<small>Analogia opcional: depois da definição técnica, use uma frase curta e bem-humorada para ajudar a fixar a ideia.</small>
+
 ## Analogia do Brucutu
 
 Use uma analogia pré-histórica para iluminar o conceito sem substituir a explicação técnica.
@@ -31,7 +33,7 @@ Use uma analogia pré-histórica para iluminar o conceito sem substituir a expli
 
 > Use esta seção quando houver um exemplo problemático.
 
-```text
+```csharp
 Exemplo didático simplificado — não recomendado para produção.
 ```
 
@@ -41,11 +43,11 @@ Explique por que o exemplo é problemático e em que contexto ele poderia aparec
 
 Apresente uma solução progressiva, explicando as decisões. Diferencie explicitamente o exemplo didático de uma implementação pronta para produção.
 
-```text
+```csharp
 Exemplo didático simplificado.
 ```
 
-## Trade-offs e quando **não** utilizar
+## Trade-offs (compensações e consequências) e quando **não** utilizar
 
 Descreva benefícios, custos, limitações e situações em que outra abordagem é melhor.
 
