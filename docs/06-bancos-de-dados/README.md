@@ -1,3 +1,5 @@
 # Bancos de dados
 
-Área reservada para persistência, modelagem, consistência, desempenho e operação de dados. Conteúdos serão adicionados gradualmente.
+Área para persistência, modelagem, consistência, desempenho e operação de dados.
+
+- [Redis e cache](redis-e-cache.md)

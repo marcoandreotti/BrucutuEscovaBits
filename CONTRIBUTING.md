@@ -32,6 +32,7 @@ Obrigado por ajudar a transformar pedras em boas ideias. O projeto aceita corre�
 - Use microtextos em `<small>` para analogias bem-humoradas quando ajudarem a fixar o conceito; mantenha a definição técnica fora deles e preserve a acessibilidade.
 - Mostre vantagens, limitações e cenários de não utilização.
 - Para exemplos de aplicação, prefira .NET/C# e informe versão, pressupostos e dependências quando forem relevantes.
+- Não repita nos artigos a nota global sobre a possibilidade de aplicar os conceitos em outras linguagens; mantenha essa orientação no README.
 - Evite exemplos inseguros, credenciais reais e comandos destrutivos.
 - Prefira links relativos para conteúdo do próprio projeto.
 - Confira se todos os links locais apontam para arquivos ou diretórios existentes.
