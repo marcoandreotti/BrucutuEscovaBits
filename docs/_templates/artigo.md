@@ -33,7 +33,7 @@ Use uma analogia pré-histórica para iluminar o conceito sem substituir a expli
 
 > Use esta seção quando houver um exemplo problemático.
 
-```text
+```csharp
 Exemplo didático simplificado — não recomendado para produção.
 ```
 
@@ -43,7 +43,7 @@ Explique por que o exemplo é problemático e em que contexto ele poderia aparec
 
 Apresente uma solução progressiva, explicando as decisões. Diferencie explicitamente o exemplo didático de uma implementação pronta para produção.
 
-```text
+```csharp
 Exemplo didático simplificado.
 ```
 
