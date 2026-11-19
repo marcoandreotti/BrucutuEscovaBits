@@ -1,3 +1,5 @@
 # Boas práticas
 
-Área reservada para legibilidade, manutenção, refatoração e evolução de código. Conteúdos serão adicionados gradualmente.
+Área para legibilidade, manutenção, refatoração e evolução de código.
+
+- [SOLID e Object Calisthenics](solid-e-object-calisthenics.md)

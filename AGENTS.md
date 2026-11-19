@@ -7,6 +7,7 @@
 - Priorize a explicação conceitual antes do código.
 - Use exemplos progressivos, claros e executáveis quando apropriado.
 - Quando houver código de aplicação, priorize exemplos em .NET/C#; indique quando o trecho for ilustrativo e não compilável isoladamente.
+- A explicação sobre .NET/C# como linguagem de demonstração fica centralizada no README; não repita essa nota em cada artigo.
 - Documente pressupostos e decisões técnicas.
 - Apresente vantagens, limitações e trade-offs; evite dogmatismo.
 - Evite overengineering e não adicione dependências sem necessidade.
