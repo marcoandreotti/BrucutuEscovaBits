@@ -23,6 +23,8 @@ Explique o contexto, a dor e os sinais de que o problema existe.
 
 Defina o conceito com precisão, incluindo limites e termos relacionados.
 
+<small>Analogia opcional: depois da definição técnica, use uma frase curta e bem-humorada para ajudar a fixar a ideia.</small>
+
 ## Analogia do Brucutu
 
 Use uma analogia pré-histórica para iluminar o conceito sem substituir a explicação técnica.
@@ -45,7 +47,7 @@ Apresente uma solução progressiva, explicando as decisões. Diferencie explici
 Exemplo didático simplificado.
 ```
 
-## Trade-offs e quando **não** utilizar
+## Trade-offs (compensações e consequências) e quando **não** utilizar
 
 Descreva benefícios, custos, limitações e situações em que outra abordagem é melhor.
 

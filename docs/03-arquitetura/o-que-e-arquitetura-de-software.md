@@ -2,6 +2,10 @@
 
 > **Resumo:** arquitetura de software é o conjunto de decisões importantes sobre a forma como um sistema é dividido, como seus componentes colaboram e quais qualidades ele precisa sustentar. Ela orienta a evolução do sistema sem se reduzir a pastas, frameworks ou diagramas bonitos.
 
+Neste artigo, **trade-offs** significa as compensações e consequências que surgem quando uma escolha favorece uma qualidade, mas pode aumentar um custo ou limitar outra.
+
+<small>Na tecnologia, um <strong>trade-off</strong> é a famosa “escolha de Sofia”: quando você precisa abrir mão de uma coisa boa para conseguir outra que é mais importante naquele momento.</small>
+
 ## Público-alvo e pré-requisitos
 
 - **Público-alvo:** estudantes e desenvolvedores iniciantes ou intermediários que já conhecem funções, módulos e APIs básicas.

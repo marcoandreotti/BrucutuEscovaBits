@@ -16,7 +16,7 @@
 
 O Brucutu Lava Bits é um portfólio educacional open source sobre engenharia de software, escrito em português brasileiro para quem está começando, consolidando fundamentos ou aprofundando sua prática.
 
-Nossa missão é transformar conceitos difíceis em conhecimento aplicável: explicar **o quê**, **por quê**, **como**, **quando usar** e quais são os **trade-offs** de cada escolha. O humor pré-histórico é um tempero — a precisão técnica é a pedra fundamental.
+Nossa missão é transformar conceitos difíceis em conhecimento aplicável: explicar **o quê**, **por quê**, **como**, **quando usar** e quais são os **trade-offs** — as compensações e consequências entre escolhas — de cada decisão. O humor pré-histórico é um tempero — a precisão técnica é a pedra fundamental.
 
 <p align="center">
   <img src="docs/imagens/icone.png" alt="Ícone ilustrado do mascote Brucutu" width="180">
