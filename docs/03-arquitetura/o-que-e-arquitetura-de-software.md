@@ -2,6 +2,10 @@
 
 > **Resumo:** arquitetura de software é o conjunto de decisões importantes sobre a forma como um sistema é dividido, como seus componentes colaboram e quais qualidades ele precisa sustentar. Ela orienta a evolução do sistema sem se reduzir a pastas, frameworks ou diagramas bonitos.
 
+Neste artigo, **trade-offs** significa as compensações e consequências que surgem quando uma escolha favorece uma qualidade, mas pode aumentar um custo ou limitar outra.
+
+<small>Na tecnologia, um <strong>trade-off</strong> é a famosa “escolha de Sofia”: quando você precisa abrir mão de uma coisa boa para conseguir outra que é mais importante naquele momento.</small>
+
 ## Público-alvo e pré-requisitos
 
 - **Público-alvo:** estudantes e desenvolvedores iniciantes ou intermediários que já conhecem funções, módulos e APIs básicas.
@@ -73,46 +77,83 @@ Uma decisão madura registra o problema, alternativas consideradas, escolha e co
 
 ## Código fossilizado
 
-O exemplo abaixo mistura transporte HTTP, regra de negócio e persistência. Ele é propositalmente simplificado para mostrar o cheiro, não para ser copiado para produção:
+O exemplo abaixo mistura transporte HTTP, regra de negócio e persistência. Ele usa C# com uma API no estilo ASP.NET Core e é propositalmente simplificado para mostrar o cheiro, não para ser copiado para produção:
 
-```pseudo
-function atualizarPreco(requisicao):
-    produto = banco.buscar(requisicao.id)
-    if produto == nulo:
-        retornar 404
-    produto.preco = requisicao.preco
-    banco.salvar(produto)
-    enviarEmail("Preço alterado")
-    retornar 200, produto
+```csharp
+// Exemplo didático simplificado — não recomendado para produção.
+[HttpPut("produtos/{id:guid}/preco")]
+public IActionResult AtualizarPreco(Guid id, AlterarPrecoRequest request)
+{
+    var produto = _dbContext.Produtos.Find(id);
+    if (produto is null)
+    {
+        return NotFound();
+    }
+
+    produto.Preco = request.Preco;
+    _dbContext.SaveChanges();
+    _emailSender.Send("Preço alterado");
+
+    return Ok(produto);
+}
 ```
 
 Problemas possíveis: validação e autorização não aparecem, o formato HTTP invade a regra, o acesso ao banco está acoplado ao caso de uso e o envio de e-mail pode tornar a resposta lenta ou falhar junto com a alteração. O trecho também não define auditoria, idempotência ou tratamento de concorrência.
 
 ## Evolução: solução comentada
 
-Uma evolução didática separa responsabilidades e torna as decisões visíveis:
+Uma evolução didática separa responsabilidades e torna as decisões visíveis. Os contratos abaixo são intencionalmente resumidos para destacar a direção das dependências:
 
-```pseudo
+```csharp
+public sealed record AlterarPrecoRequest(decimal Preco);
+public sealed record AlterarPrecoCommand(Guid ProdutoId, decimal Preco);
+
 // Adaptador: traduz HTTP para o comando da aplicação.
-function PUT /produtos/{id}/preco(requisicao, identidade):
-    exigirPermissao(identidade, "catalogo.preco.editar")
-    comando = AlterarPreco(id, requisicao.preco)
-    resultado = catalogo.alterarPreco(comando)
-    retornar respostaHttp(resultado)
+[HttpPut("produtos/{id:guid}/preco")]
+public async Task<ActionResult<ProdutoResponse>> AtualizarPreco(
+    Guid id,
+    AlterarPrecoRequest request,
+    CancellationToken cancellationToken)
+{
+    if (!User.HasClaim("permission", "catalogo.preco.editar"))
+    {
+        return Forbid();
+    }
+
+    var command = new AlterarPrecoCommand(id, request.Preco);
+    var produto = await _catalogo.AlterarPrecoAsync(command, cancellationToken);
+
+    return Ok(ProdutoResponse.From(produto));
+}
 
 // Aplicação: coordena o caso de uso.
-function alterarPreco(comando):
-    validarPreco(comando.preco)
-    produto = repositorio.buscarPorId(comando.id)
-    exigirExistencia(produto)
-    produto.alterarPreco(comando.preco)
-    repositorio.salvar(produto)
-    auditoria.registrar("preco_alterado", produto.id)
-    publicarDepoisDaTransacao(ProdutoAtualizado(produto.id))
-    retornar produto
+public async Task<Produto> AlterarPrecoAsync(
+    AlterarPrecoCommand command,
+    CancellationToken cancellationToken)
+{
+    ValidarPreco(command.Preco);
+
+    var produto = await _repositorio.BuscarPorIdAsync(
+        command.ProdutoId,
+        cancellationToken);
+
+    if (produto is null)
+    {
+        throw new ProdutoNaoEncontradoException(command.ProdutoId);
+    }
+
+    produto.AlterarPreco(command.Preco);
+    await _repositorio.SalvarAsync(produto, cancellationToken);
+    await _auditoria.RegistrarAsync("preco_alterado", produto.Id, cancellationToken);
+    await _eventos.PublicarDepoisDaTransacaoAsync(
+        new ProdutoAtualizado(produto.Id),
+        cancellationToken);
+
+    return produto;
+}
 ```
 
-Este código continua sendo uma ilustração. Em produção, seria necessário definir transações, autenticação real, autorização robusta, concorrência, observabilidade, proteção contra abuso, tratamento de falhas e testes. A separação ajuda porque cada decisão pode ser examinada e testada, mas também adiciona conceitos e código.
+Este código continua sendo uma ilustração: os campos privados, registros, contratos e configurações de infraestrutura foram omitidos. Em produção, seria necessário definir transações, autenticação real, autorização robusta, concorrência, observabilidade, proteção contra abuso, tratamento de falhas e testes. A separação ajuda porque cada decisão pode ser examinada e testada, mas também adiciona conceitos e código.
 
 ## Trade-offs e quando **não** utilizar
 
@@ -139,16 +180,9 @@ Escolha um sistema pequeno, como uma lista de tarefas. Desenhe três componentes
 
 Critério de sucesso: cada componente tem uma responsabilidade compreensível, as dependências têm direção e pelo menos um trade-off está explícito.
 
-## Resumo e referências
+## Resumo
 
 Arquitetura trata de decisões estruturais, responsabilidades, relações e qualidades do sistema. Ela não se confunde com pastas nem com frameworks. Uma boa arquitetura é adequada ao contexto, torna riscos visíveis e permite evolução consciente.
-
-Referências confiáveis:
-
-- [Software Architecture in Practice, 4th edition — SEI](https://www.sei.cmu.edu/library/software-architecture-in-practice-4th-edition/)
-- [ISO/IEC/IEEE 42010:2022 — descrição de arquiteturas](https://www.iso.org/standard/74393.html)
-- [Martin Fowler — MonolithFirst](https://martinfowler.com/bliki/MonolithFirst.html)
-- [Architecture Decision Records — Michael Nygard](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)
 
 ## Próximos estudos
 

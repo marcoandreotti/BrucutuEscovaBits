@@ -2,8 +2,11 @@
 
 - Preserve a identidade editorial do Brucutu Lava Bits: didática, inteligente, divertida e tecnicamente correta.
 - Escreva a documentação em português brasileiro; mantenha nomes técnicos convencionais quando isso melhorar a clareza.
+- Ao usar um termo técnico em inglês, preserve-o quando for consagrado, mas explique ou traduza brevemente na primeira ocorrência. Exemplo: **trade-offs (compensações e consequências entre escolhas)**.
+- Quando o conteúdo permitir humor, acrescente depois da definição uma microexplicação em `<small>`, com uma analogia curta e memorável. O humor deve reforçar — nunca substituir — a precisão técnica.
 - Priorize a explicação conceitual antes do código.
 - Use exemplos progressivos, claros e executáveis quando apropriado.
+- Quando houver código de aplicação, priorize exemplos em .NET/C#; indique quando o trecho for ilustrativo e não compilável isoladamente.
 - Documente pressupostos e decisões técnicas.
 - Apresente vantagens, limitações e trade-offs; evite dogmatismo.
 - Evite overengineering e não adicione dependências sem necessidade.
