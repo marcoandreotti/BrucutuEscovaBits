@@ -1,0 +1,19 @@
+# Sistemas operacionais e editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Ambientes e segredos locais
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+build/
+coverage/
+
+# Arquivos temporários
+*.log
+*.tmp
+*.swp
