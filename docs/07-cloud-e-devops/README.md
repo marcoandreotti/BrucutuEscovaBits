@@ -1,3 +1,5 @@
 # Cloud e DevOps
 
-Área reservada para entrega, operação, observabilidade, automação e confiabilidade. Conteúdos serão adicionados gradualmente.
+Área para entrega, operação, observabilidade, automação e confiabilidade.
+
+- [Observabilidade, logs e métricas](observabilidade-logs-e-metricas.md)

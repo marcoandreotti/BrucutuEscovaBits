@@ -5,11 +5,11 @@
 ## Disponível
 
 1. [O que é arquitetura de software?](../docs/03-arquitetura/o-que-e-arquitetura-de-software.md) — visão inicial sobre componentes, responsabilidades e trade-offs.
+2. [Código limpo, DRY e YAGNI](../docs/00-fundamentos/clean-code-dry-yagni.md) — legibilidade e evolução sem complexidade prematura.
+3. [Git Flow e commits semânticos](../docs/00-fundamentos/git-flow-e-commits-semanticos.md) — colaboração e histórico compreensível.
 
 ## Planejado
 
-- Fundamentos de programação e decomposição de problemas.
-- Git e colaboração com segurança.
 - Leitura de código e organização de pequenos módulos.
 - Testes automatizados: primeiros passos.
 
