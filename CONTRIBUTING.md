@@ -28,6 +28,7 @@ Obrigado por ajudar a transformar pedras em boas ideias. O projeto aceita corre�
 ## Qualidade editorial e técnica
 
 - Revise ortografia, acentuação e consistência dos termos.
+- Evite o travessão longo `—` na redação; prefira pontuação simples e frases claras.
 - Ao introduzir um termo técnico em inglês, mantenha o original quando ele for útil para pesquisa, mas acrescente uma tradução ou explicação breve na primeira ocorrência.
 - Use microtextos em `<small>` para analogias bem-humoradas quando ajudarem a fixar o conceito; mantenha a definição técnica fora deles e preserve a acessibilidade.
 - Mostre vantagens, limitações e cenários de não utilização.
