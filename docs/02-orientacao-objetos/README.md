@@ -13,7 +13,7 @@ Orientação a objetos não é um concurso para ver quem cria mais classes. O ob
 
 ## Conteúdo disponível
 
-- [Do dado exposto ao objeto responsável](do-dado-exposto-ao-objeto-responsavel.md): classes anêmicas, encapsulamento, comportamentos, `record`, identidade e colaboração.
+- [Do dado exposto ao objeto responsável](do-dado-exposto-ao-objeto-responsavel.md): classes anêmicas, encapsulamento, comportamentos, tipos primitivos, `record`, identidade e colaboração.
 
 ## Mapa de estudos
 
