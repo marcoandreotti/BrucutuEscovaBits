@@ -15,9 +15,10 @@ Um laboratório futuro deverá conter:
 
 ## Laboratórios planejados
 
+- [Arquitetura de mensageria e observabilidade](arquitetura-mensageria-observavel/): experimento guiado com RabbitMQ, telemetria, logs estruturados e Serilog.
 - Comparar duas decomposições para uma API de catálogo.
 - Medir o efeito de um índice em uma consulta.
 - Introduzir um teste em um trecho de código fossilizado.
 - Simular timeout e fallback em uma integração.
 
-Nenhum laboratório executável foi publicado ainda. Os itens acima são planejamento e não possuem links para conteúdos inexistentes.
+Os itens sem link continuam planejados. O laboratório publicado é uma atividade guiada em Markdown; ele não inclui ainda uma solução fechada nem um ambiente Docker pronto.
