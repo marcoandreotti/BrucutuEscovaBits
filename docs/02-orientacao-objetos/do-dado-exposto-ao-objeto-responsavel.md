@@ -13,6 +13,7 @@ Ao final, a pessoa leitora deverá conseguir:
 
 - reconhecer quando uma classe está apenas transportando dados;
 - proteger uma regra de negócio no lugar em que ela pode ser mantida;
+- identificar quando tipos primitivos escondem conceitos do domínio;
 - diferenciar entidade, objeto de valor, `record` e serviço de aplicação;
 - avaliar quando uma classe deve ser fechada para extensão ou quando a composição é mais adequada.
 
@@ -58,6 +59,91 @@ public class PedidoService
 O exemplo permite que qualquer consumidor altere `Status`, `Itens` e `Total` sem respeitar as relações entre eles. O serviço também pode se multiplicar em várias versões, cada uma aplicando uma regra ligeiramente diferente.
 
 Uma classe anêmica pode ser correta quando seu propósito é transportar dados entre fronteiras. Para um objeto de domínio com invariantes, ela merece uma pergunta: **quem deveria ser responsável por impedir este estado inválido?**
+
+## Tipos primitivos: simples não significa sem significado
+
+`string`, `int`, `decimal`, `Guid` e `DateTime` são ferramentas fundamentais. O problema aparece quando tipos genéricos representam conceitos diferentes e a aplicação espalha suas regras por condicionais, comentários e convenções implícitas. Esse cheiro é conhecido como **primitive obsession** (obsessão por tipos primitivos).
+
+```csharp
+public sealed class Cliente
+{
+    public string Email { get; init; } = "";
+    public string Telefone { get; init; } = "";
+    public decimal LimiteCredito { get; init; }
+}
+
+void EnviarCobranca(string email) { /* ... */ }
+void EnviarSms(string telefone) { /* ... */ }
+```
+
+O compilador aceita `EnviarSms(cliente.Email)` porque ambos são `string`. O tipo não comunica a intenção e também não garante que o valor seja válido. Um objeto de valor pequeno pode transformar essa diferença conceitual em uma fronteira verificável:
+
+```csharp
+public readonly record struct Email
+{
+    public string Valor { get; }
+
+    public Email(string valor)
+    {
+        if (string.IsNullOrWhiteSpace(valor) || !valor.Contains('@'))
+            throw new ArgumentException("E-mail inválido.", nameof(valor));
+
+        Valor = valor.Trim();
+    }
+}
+
+public readonly record struct Telefone
+{
+    public string Valor { get; }
+
+    public Telefone(string valor)
+    {
+        if (string.IsNullOrWhiteSpace(valor))
+            throw new ArgumentException("Telefone inválido.", nameof(valor));
+
+        Valor = valor.Trim();
+    }
+}
+
+void EnviarCobranca(Email email) { /* ... */ }
+void EnviarSms(Telefone telefone) { /* ... */ }
+```
+
+Agora uma chamada trocada falha em compilação, e a validação básica fica concentrada no tipo. O exemplo é didático: validar e-mail apenas pela presença de `@` não é uma política completa de comunicação.
+
+Há uma ressalva importante: todo `struct` possui um valor padrão. Portanto, isto é possível mesmo sem chamar explicitamente o construtor:
+
+```csharp
+var emailInvalido = default(Email);
+```
+
+Nesse caso, `emailInvalido.Valor` fica vazio e a invariante é quebrada. Quando o tipo precisa ser sempre válido e o custo de uma alocação é aceitável, uma `record class` pode comunicar melhor essa intenção:
+
+```csharp
+public sealed record Email
+{
+    public string Valor { get; }
+
+    public Email(string valor)
+    {
+        if (string.IsNullOrWhiteSpace(valor) || !valor.Contains('@'))
+            throw new ArgumentException("E-mail inválido.", nameof(valor));
+
+        Valor = valor.Trim();
+    }
+}
+```
+
+`record struct` continua sendo uma boa escolha para pequenos valores quando o valor padrão é aceitável, ou quando a aplicação possui uma estratégia explícita para lidar com ele. O ponto não é escolher classe ou struct por receita: é garantir que a representação preserve as invariantes esperadas.
+
+<small>Se duas coisas cabem na mesma `string`, o compilador pode achar que são gêmeas. Um tipo próprio coloca uma plaquinha na caverna.</small>
+
+Não é necessário criar um tipo para cada variável. Mantenha o primitivo quando não houver regra, identidade ou risco real de confusão. Considere um tipo próprio quando:
+
+- o valor tiver formato ou intervalo válido;
+- duas strings ou números puderem ser trocados acidentalmente;
+- a regra aparecer em vários pontos;
+- o conceito tiver operações próprias, como somar dinheiro ou normalizar um identificador.
 
 ## Evolução: comportamento perto da regra
 
@@ -185,6 +271,8 @@ Critério de sucesso: uma pessoa que não conhece a implementação consegue des
 - Classe anêmica é um sinal para investigar, não um pecado universal.
 - Encapsulamento protege invariantes e torna as transições explícitas.
 - `record` comunica igualdade por valor; entidades normalmente dependem de identidade.
+- Tipos primitivos são adequados para valores simples; objetos de valor dão nome e proteção a conceitos com regras.
+- `record struct` oferece semântica de valor, mas seu valor padrão pode contornar invariantes.
 - Classes fechadas para extensão são uma decisão de contrato, não um substituto para encapsulamento.
 - A responsabilidade deve ficar próxima dos dados que ela protege, sem absorver coordenação e infraestrutura indevidamente.
 
@@ -197,4 +285,4 @@ Referências:
 ## Próximos estudos
 
 - Conteúdo relacionado já disponível: [SOLID e Object Calisthenics](../01-boas-praticas/solid-e-object-calisthenics.md).
-- Conteúdo planejado: composição versus herança, objetos de valor e colaboração entre objetos.
+- Conteúdo planejado: composição versus herança, objetos de valor mais ricos e colaboração entre objetos.
