@@ -1,6 +1,7 @@
 # Instruções permanentes para agentes
 
 - Preserve a identidade editorial do Brucutu Lava Bits: didática, inteligente, divertida e tecnicamente correta.
+- Evite o travessão longo `—`; prefira vírgulas, dois-pontos, parênteses ou frases separadas.
 - Escreva a documentação em português brasileiro; mantenha nomes técnicos convencionais quando isso melhorar a clareza.
 - Ao usar um termo técnico em inglês, preserve-o quando for consagrado, mas explique ou traduza brevemente na primeira ocorrência. Exemplo: **trade-offs (compensações e consequências entre escolhas)**.
 - Quando o conteúdo permitir humor, acrescente depois da definição uma microexplicação em `<small>`, com uma analogia curta e memorável. O humor deve reforçar — nunca substituir — a precisão técnica.
