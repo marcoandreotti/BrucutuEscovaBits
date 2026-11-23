@@ -1,0 +1,24 @@
+services:
+  ministack:
+    image: ${MINISTACK_IMAGE:-ministackorg/ministack:latest}
+    container_name: ${MINISTACK_CONTAINER_NAME:-brucutu-lab-ministack}
+    restart: unless-stopped
+    environment:
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION:-us-east-1}
+      MINISTACK_REGION: ${MINISTACK_REGION:-us-east-1}
+      MINISTACK_ACCOUNT_ID: ${MINISTACK_ACCOUNT_ID:-000000000000}
+      PERSIST_STATE: ${MINISTACK_PERSIST_STATE:-1}
+      STATE_DIR: /data/ministack-state
+    ports:
+      - "${MINISTACK_PORT:-4566}:4566"
+    volumes:
+      - brucutu_ministack_data:/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:4566/_ministack/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
+volumes:
+  brucutu_ministack_data:

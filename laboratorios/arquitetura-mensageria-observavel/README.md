@@ -49,6 +49,14 @@ Para o primeiro experimento, use credenciais locais e dados fictícios. Não col
 3. Leia [Telemetria](02-telemetria.md) e crie uma atividade para o fluxo de publicação e consumo.
 4. Leia [Observabilidade e Serilog](03-observabilidade-e-serilog.md) e substitua mensagens soltas por logs estruturados.
 5. Execute o [desafio integrado](04-desafio-integrado.md), provocando falhas e registrando evidências.
+6. Suba o [ambiente local](ambiente-local/README.md) e explore o painel do RabbitMQ.
+7. Compare a experiência com [SQS no MiniStack](06-sqs-com-ministack.md).
+
+## Complemento: ambiente local e duas formas de mensageria
+
+- [RabbitMQ Management](05-rabbitmq-management.md): exchanges, bindings, filas, usuários, permissões e diagnóstico pelo painel.
+- [SQS com MiniStack](06-sqs-com-ministack.md): filas padrão, FIFO, visibilidade, confirmação, DLQ e polling por API.
+- [Ambiente local](ambiente-local/README.md): comandos para iniciar, verificar e limpar os serviços sem usar uma conta AWS real.
 
 ## Resultado esperado
 
@@ -61,6 +69,7 @@ Ao terminar, deve ser possível demonstrar:
 - logs com propriedades estruturadas;
 - métricas de mensagens publicadas, processadas, falhas e duração;
 - um trace ou correlação que conecte publicação e consumo.
+- uma comparação registrada entre o modelo de broker do RabbitMQ e o modelo de filas acessadas por API do SQS.
 
 ## Critérios de sucesso
 
