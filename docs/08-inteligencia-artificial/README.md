@@ -11,6 +11,10 @@ Esta área trata do uso responsável de IA para analisar, planejar, implementar,
 - [Fluxo rastreável de desenvolvimento com IA](fluxo-rastreavel-com-ia.md) — da demanda ao commit, testes, documentação e Pull Request.
 - [Acervo de ferramentas de IA](acervo-de-ferramentas-de-ia.md) — categorias, critérios de escolha e ferramentas conhecidas pelo projeto.
 
+## Laboratório relacionado
+
+- [Brucutu.AI: Enterprise Generative AI Playground](../../laboratorios/brucutu-ai/README.md): nove etapas conceituais com experimentos propostos para integrar modelos, documentos, ferramentas e agentes a uma aplicação com limites claros. A aplicação executável será construída em uma etapa futura.
+
 ## Princípios desta área
 
 - IA sugere; pessoas responsáveis decidem.
