@@ -81,6 +81,9 @@ As trilhas combinam artigos disponíveis com etapas planejadas. Conteúdos futur
 
 Os [laboratórios](laboratorios/README.md) são desafios da caverna: pequenos experimentos para aplicar uma ideia, observar seus efeitos e registrar o que foi aprendido. Cada laboratório deverá informar objetivo, pré-requisitos, passos, resultado esperado e perguntas de reflexão.
 
+- [Arquitetura de mensageria e observabilidade](laboratorios/arquitetura-mensageria-observavel/README.md): experimento guiado com RabbitMQ, telemetria, logs estruturados e Serilog, com desafios para investigar o fluxo das mensagens e suas falhas.
+- [Brucutu.AI: Enterprise Generative AI Playground](laboratorios/brucutu-ai/README.md): uma jornada conceitual em nove etapas, da integração com modelos de linguagem a agentes e MCP, com experimentos propostos e decisões arquiteturais. A implementação executável é uma evolução futura.
+
 ## Como estudar
 
 1. Escolha uma trilha compatível com seu momento.
